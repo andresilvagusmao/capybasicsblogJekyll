@@ -1,0 +1,17 @@
+---
+layout: default
+---
+
+<article>
+  <header>
+    <h1>{{ page.title }}</h1>
+    <p><em>{{ page.date | date: "%B %d, %Y" }}</em></p>
+    <p>Author: {{ page.author }}</p>
+  </header>
+  <div>
+    {{ content }}
+  </div>
+  <footer>
+    <p><em>{{ page.description }}</em></p>
+  </footer>
+</article>
