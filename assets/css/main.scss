@@ -1,8 +1,9 @@
 @import "styles";
 .site-title::before {
-	content: url("/./images/capybasicslogo.png");
+	content: url("/assets/images/capybasicslogo.png");
 	display: inline-block;
 	position: relative;
 	width: 37px;
 	top: 5px;
+    color: aqua;
 }
