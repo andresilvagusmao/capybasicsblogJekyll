@@ -25,6 +25,26 @@ pre {
     padding: 15px;
     border-radius: 5px;
 }
+
+.author-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.author-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+.author-link {
+    text-decoration: none;
+    color: inherit;
+}
 </style>
 
 
@@ -32,25 +52,35 @@ pre {
   <header>
     <h1>{{ page.title }}</h1>
     <p><em>{{ page.date | date: "%B %d, %Y" }}</em></p>
-    <p>Author: {{ page.author }}</p><a href="https://www.linkedin.com/in/andre-silva-gusmao/" target="_blank">
-        <img src="../assets/images/MyFaceTransparent.png" alt="{{ page.author }}" style="width: 50px; height: 50px; vertical-align: middle;">
-      </a>
+    <div class="author-container">
+      
+      <a href="https://www.linkedin.com/in/andre-silva-gusmao/" target="_blank"><img src="{{ site.baseurl }}/assets/images/profilePic.jpg" alt="{{ page.author }}" class="author-image"> <p>Author: {{ page.author }}</p></a>
+    </div>
+    <p><em>{{ page.description }}</em></p>
   </header>
+  {% if page.video_id %}
+<div class="floating-video" id="videoPlayer">
+  <button class="video-toggle" onclick="toggleVideo()">Hide/Show</button>
+  <iframe 
+    width="100%" 
+    height="100%" 
+    src="https://www.youtube.com/embed/{{ page.video_id }}" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope" 
+    allowfullscreen>
+  </iframe>
+</div>
+
+<script>
+function toggleVideo() {
+  const player = document.getElementById('videoPlayer');
+  player.classList.toggle('hidden');
+}
+</script>
+{% endif %}
   <div>
     {{ content }}
   </div>
   <footer>
-    <div>
-    <a href="https://www.linkedin.com/in/andre-silva-gusmao/" target="_blank">
-        <img src="../assets/images/MyFaceTransparent.png" alt="{{ page.author }}" style="width: 50px; height: 50px; vertical-align: middle;">
-      </a>
-      <a href="https://www.linkedin.com/in/andre-silva-gusmao/" target="_blank">
-        <img src="../assets/images/MyFaceTransparent.png" alt="{{ page.author }}" style="width: 50px; height: 50px; vertical-align: middle;">
-      </a>
-    </div>
-    <p><em>{{ page.description }}</em></p>
-    <a href="https://www.linkedin.com/in/andre-silva-gusmao/" target="_blank">
-        <img src="../assets/images/MyFaceTransparent.png" alt="{{ page.author }}" style="width: 50px; height: 50px; vertical-align: middle;">
-      </a>
   </footer>
 </article>
