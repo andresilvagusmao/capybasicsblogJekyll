@@ -45,6 +45,213 @@ pre {
     text-decoration: none;
     color: inherit;
 }
+
+
+
+
+
+
+section.videowrapper {
+    position: relative;
+    height: 0;
+    padding-bottom: 56.25%;
+    margin-bottom: 50px;
+    background: #000;
+}
+
+.videowrapper iframe,.videowrapper video {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+h1.play-video {
+    text-transform: capitalize;
+    text-align: center;
+    color: #ff5733;
+}
+
+/** Use .sticky */
+
+.ytvideo .is-sticky,.videoTag .is-sticky{
+    position: fixed;
+    right: 3px;
+    bottom: 3px;
+    top: auto;
+    left: auto;
+    max-width: 280px;
+    max-height: 158px;
+    width: 280px;
+    height: 158px;
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+section.main-wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+section.level {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    text-transform: uppercase;
+    height: 250px;
+    margin-bottom: 50px;
+}
+
+.close-button {
+    position: fixed;
+    box-sizing: border-box;
+    display: block;
+    right: 24px;
+    bottom: 175px;
+    top: auto;
+    left: auto;
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    display: none;
+}
+
+.close-button:before,
+.close-button:after {
+    width: 20px;
+    height: 5px;
+    transform: rotate(-45deg);
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    background-color: #4F2121;
+    transition: all 0.2s ease-out;
+}
+
+.close-button:after {
+    transform: rotate(45deg);
+}
+
+.close-button:hover:after {
+    transform: rotate(-45deg);
+}
+
+.close-button:hover:before {
+    transform: rotate(45deg);
+}
+
+.gradient-overlay {
+    position: fixed;
+    right: 3px;
+    bottom: 3px;
+    top: auto;
+    left: auto;
+    max-width: 280px;
+    max-height: 158px;
+    width: 280px;
+    height: 158px;
+    opacity: .01;
+    background: #000;
+    z-index: 1;
+    display: none;
+}
+
+i.fa.fa-arrows-alt {
+    position: fixed;
+    right: 8px;
+    bottom: 5px;
+    top: auto;
+    left: auto;
+    color: #fff;
+    z-index: 2;
+    cursor: pointer;
+    display: none;
+}
+
+@media only screen and (max-width:95%) {
+    section.main-wrapper {
+        width: 95%;
+    }
+    section.level {
+        height: 300px;
+        margin-bottom: 50px;
+    }
+}
+
+
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #333;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-family: 'Merriweather', serif;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: #555;
+}
+
+.back-to-top::before {
+    content: "↑";
+    font-size: 20px;
+}
 </style>
 
 
@@ -57,9 +264,22 @@ pre {
       <a href="https://www.linkedin.com/in/andre-silva-gusmao/" target="_blank"><img src="{{ site.baseurl }}/assets/images/profilePic.jpg" alt="{{ page.author }}" class="author-image"> <p>Author: {{ page.author }}</p></a>
     </div>
     <p><em>{{ page.description }}</em></p>
+    {% if page.video_id %}
+    <script src="{{ site.baseurl }}/assets/scripts/video.js"></script>
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/video.scss">
+    {% endif %}
   </header>
   {% if page.video_id %}
-<div class="floating-video" id="videoPlayer">
+  <section class="main-wrapper">
+  <section class="videowrapper ytvideo">
+    <a href="javascript:void(0);" class="close-button"></a>
+    <div class="gradient-overlay"></div>
+    <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+    <iframe class="featured-video" width="560" height="315" src="https://www.youtube.com/embed/{{ page.video_id }}?enablejsapi=1&amp;?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+</section>
+</section>
+
+<!-- <div class="floating-video" id="videoPlayer">
   <button class="video-toggle" onclick="toggleVideo()">Hide/Show</button>
   <iframe 
     width="100%" 
@@ -76,11 +296,31 @@ function toggleVideo() {
   const player = document.getElementById('videoPlayer');
   player.classList.toggle('hidden');
 }
-</script>
+</script> -->
 {% endif %}
   <div>
     {{ content }}
   </div>
   <footer>
   </footer>
+  <button onclick="scrollToTop()" class="back-to-top" id="backToTop">TOP</button>
+  <script>
+    // Show button when page is scrolled
+    window.addEventListener('scroll', function() {
+      const button = document.getElementById('backToTop');
+      if (window.scrollY > 300) {
+        button.classList.add('visible');
+      } else {
+        button.classList.remove('visible');
+      }
+    });
+  
+    // Scroll to top when button is clicked
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  </script>
 </article>

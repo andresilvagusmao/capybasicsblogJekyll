@@ -18,6 +18,9 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 keep_files: [assets]
+sass:
+  sass_dir: _sass
+  style: compressed
 baseurl: "" 
 title: Capybasics Blog
 email: capybasics@gmail.com
